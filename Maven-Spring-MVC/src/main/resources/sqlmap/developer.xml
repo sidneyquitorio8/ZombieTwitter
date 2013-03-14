@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Developer">
+
+	<resultMap id="DeveloperResult" class="com.richardhoppes.example.model.Developer">
+		<result property="id" column="intId"/>
+		<result property="apiKey" column="strApiKey"/>
+		<result property="createdAt" column="dateCreatedAt"/>
+		<result property="modifiedAt" column="dateModifiedAt"/>
+	</resultMap>
+
+	<select id="getDeveloperByApiKey" parameterClass="java.lang.String" resultMap="Developer.DeveloperResult">
+		SELECT
+			d.intId,
+			d.strApiKey,
+			d.dateCreatedAt,
+			d.dateModifiedAt
+		FROM developer d
+		WHERE d.strApiKey = #value#
+	</select>
+
+</sqlMap>

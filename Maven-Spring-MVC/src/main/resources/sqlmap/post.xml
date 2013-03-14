@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Post">
+
+    <resultMap id="PostResult" class="com.richardhoppes.example.model.Post">
+        <result property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="content" column="content"/>
+    </resultMap>
+
+
+    <cacheModel id="user-cache" type="LRU">
+        <property name="CacheSize" value="1000"/>
+    </cacheModel>
+
+    <select id="getAllPost" parameterClass="java.lang.String" resultMap="Post.PostResult">
+        SELECT *
+        FROM POST
+    </select>
+
+    <select id="getPostByID" parameterClass="java.lang.Integer" resultMap="Post.PostResult">
+        SELECT *
+        FROM POST where id = #value#
+    </select>
+
+    <insert id="insertPost" parameterClass="com.richardhoppes.example.model.Post">
+        insert into post (username, content) values (#username#, #content#)
+    </insert>
+
+
+</sqlMap>
